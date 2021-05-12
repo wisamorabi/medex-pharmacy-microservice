@@ -3,7 +3,6 @@ package com.medex.model;
 import javax.persistence.*;
 
 //The pharmacy class
-//Type = 1
 @Entity //A 'serializable' entity
 @Table(name = "Pharmacy") //Where this entity will be placed
 //Now, the fields that we will annotate will be stored in the hosts table.
@@ -12,26 +11,26 @@ public class Pharmacy {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //"Do this identification for me, generate that specific ID for me
 	@Column(name="id") //Which column?
 	int id;
-	@Column(name="consumerID")
-	int consumerID;
+	@Column(name="name")
+	String name;
 	@Column(name="wallet")
 	int wallet;
 	
 	public Pharmacy() {}
 
 	//Non default constructor
-	public Pharmacy(int id, int aconsumerID, int awallet) {
+	public Pharmacy(int id, String aname, int awallet) {
 		this.id = id;
-		this.consumerID = aconsumerID;
+		this.name = aname;
 		this.wallet = awallet;
 	}
 	public int getId()
 	{
 		return id;
 	}
-	public int getConsumerID()
+	public String getName()
 	{
-		return consumerID;
+		return name;
 	}
 	public int getWallet()
 	{
@@ -44,8 +43,8 @@ public class Pharmacy {
 	{
 		this.id = id;
 	}
-	public void setConsumerID(int aconsumerID)
+	public void setName(String name)
 	{
-		this.consumerID = aconsumerID;
+		this.name = name;
 	}
 }

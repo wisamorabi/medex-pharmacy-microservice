@@ -12,12 +12,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.medex.communicationmodules.PharmacyInfo;
 import com.medex.model.Pharmacy;
 import com.medex.services.PharmacyService;
 
 
 //Request resources which acts as a layer before our Pharmacy services
-@Path("/")
+@Path("/Pharmacies")
 public class PharmacyResources {
 	PharmacyService pharmacyService = new PharmacyService();
 
@@ -27,14 +28,14 @@ public class PharmacyResources {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Pharmacy> getPharmacys() {
+	public List<PharmacyInfo> getPharmacys() {
 		return pharmacyService.getAllPharmacies();
 	}
 
 	@GET
 	@Path("{Pharmacyid}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Pharmacy getPharmacy(@PathParam("Pharmacyid") int id) {
+	public PharmacyInfo getPharmacy(@PathParam("Pharmacyid") int id) {
 		return pharmacyService.getPharmacy(id);
 	}
 
@@ -58,5 +59,11 @@ public class PharmacyResources {
 	@Path("{Pharmacyid}")
 	public void removePharmacy(@PathParam("Pharmacyid") int id, Pharmacy Pharmacy) {
 		pharmacyService.removePharmacy(id);
+	}
+	
+	@Path("{Pharmacyid}/PharmaceuticalsStock")
+	public PharmaceuticalsStockResources getPharmaceuticalsStock(@PathParam("Pharmacyid")int id)
+	{
+		return new PharmaceuticalsStockResources();
 	}
 }
