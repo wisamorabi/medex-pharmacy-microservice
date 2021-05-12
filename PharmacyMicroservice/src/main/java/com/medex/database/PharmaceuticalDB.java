@@ -7,11 +7,11 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.medex.model.Doctor;
+import com.medex.model.Pharmaceutical;
 
-//This class is specifically for the doctors database operations
-public class DoctorDB {
-	public void insertDoctor(Doctor doctor)
+//This class is specifically for the pharmacies database operations
+public class PharmaceuticalDB {
+	public void insertPharmaceutical(Pharmaceutical pharmaceutical)
 	{
 		Transaction transaction = null; //You have to make a transaction object
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
@@ -19,8 +19,8 @@ public class DoctorDB {
 			// start a transaction using the session
 			transaction = session.beginTransaction();
 			
-			session.save(doctor); //Save transaction allows us to store the doctor object into the database (This is like insert with the fields, etc, etc)
-								   //But hibernate knows what to do using the annotation on the doctor class
+			session.save(pharmaceutical); //Save transaction allows us to store the pharmaceutical object into the database (This is like insert with the fields, etc, etc)
+								   //But hibernate knows what to do using the annotation on the pharmaceutical class
 			
 			// commit transaction		
 			transaction.commit(); //Finalize transaction
@@ -35,8 +35,8 @@ public class DoctorDB {
 		}
 	}
 	
-	//This is the update, which doctor we want to delete
-	public void updateDoctor(Doctor doctor)
+	//This is the update, which pharmaceutical we want to delete
+	public void updatePharmaceutical(Pharmaceutical pharmaceutical)
 	{
 		Transaction transaction = null; //You have to make a transaction object
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
@@ -44,8 +44,8 @@ public class DoctorDB {
 			// start a transaction using the session
 			transaction = session.beginTransaction();
 			
-			session.saveOrUpdate(doctor); //Save transaction allows us to store the doctor object into the database (This is like insert with the fields, etc, etc)
-										   //But hibernate knows what to do using the annotation on the doctor class
+			session.saveOrUpdate(pharmaceutical); //Save transaction allows us to store the pharmaceutical object into the database (This is like insert with the fields, etc, etc)
+										   //But hibernate knows what to do using the annotation on the pharmaceutical class
 			
 			// commit transaction
 			
@@ -63,18 +63,18 @@ public class DoctorDB {
 	
 	
 	//Id of what you want to delete
-	public void deleteDoctor(int id)
+	public void deletePharmaceutical(int id)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		Doctor doctor = null;
+		Pharmaceutical pharmaceutical = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
 			
-			doctor = session.get(Doctor.class, id); //We have to get the specific doctor using the ID from the database, so we can delete it
+			pharmaceutical = session.get(Pharmaceutical.class, id); //We have to get the specific pharmaceutical using the ID from the database, so we can delete it
 			
-			session.delete(doctor); //We delete that doctor
+			session.delete(pharmaceutical); //We delete that pharmaceutical
 			
 			// commit transaction
 			transaction.commit(); //Finalize transaction
@@ -89,42 +89,42 @@ public class DoctorDB {
 		}
 	}
 
-	//Retrieve all doctors from the database and store them in a list
-	public List<Doctor> getDoctors()
+	//Retrieve all pharmacies from the database and store them in a list
+	public List<Pharmaceutical> getPharmacies()
 	{
 		Transaction transaction = null;
-		List<Doctor> doctors = null;
+		List<Pharmaceutical> pharmacies = null;
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
-			doctors = session.createQuery("from Doctor", Doctor.class).list(); //This is a hibernate query (Get all doctors from the doctors database)
-																		 //Each returned row is a doctor object inserted into the list of doctors --> doctors
+			pharmacies = session.createQuery("from Pharmaceutical", Pharmaceutical.class).list(); //This is a hibernate query (Get all pharmacies from the pharmacies database)
+																		 //Each returned row is a pharmaceutical object inserted into the list of pharmacies --> pharmacies
 			transaction.commit();
 		}
-		return doctors;
+		return pharmacies;
 	}
 	
-	public Doctor getDoctor(int id)
+	public Pharmaceutical getPharmaceutical(int id)
 	{
 		Transaction transaction = null;
-		Doctor doctor = null;
+		Pharmaceutical pharmaceutical = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession())
 		{
 			//start a transaction
 			transaction = session.beginTransaction();
 			
 			// get one object
-			String hql = " FROM Doctor H WHERE H.id = :id"; //From the doctor table
+			String hql = " FROM Pharmaceutical H WHERE H.id = :id"; //From the pharmaceutical table
 			Query query = session.createQuery(hql);
 			query.setParameter("id", id); //The parameter ":id" is set to the id we passed.
 			List results = query.getResultList(); //The results are given to us in a list.
 												  //Since the id is unique, we will get a list of one item
 			
-			//If the result is not null, we get a single doctor object
+			//If the result is not null, we get a single pharmaceutical object
 			if (results != null && !results.isEmpty())
 			{
-				doctor = (Doctor) results.get(0); //So, we retrieve said doctor from the first index in the list
+				pharmaceutical = (Pharmaceutical) results.get(0); //So, we retrieve said pharmaceutical from the first index in the list
 			}
 			//commit transaction
 			transaction.commit();
@@ -137,7 +137,7 @@ public class DoctorDB {
 			}
 			e.printStackTrace();
 		}
-		return doctor; //Return the doctor object retrieved
+		return pharmaceutical; //Return the pharmaceutical object retrieved
 	}
 	
 }
