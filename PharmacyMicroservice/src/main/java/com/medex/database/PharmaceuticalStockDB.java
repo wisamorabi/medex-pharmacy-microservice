@@ -98,7 +98,7 @@ public class PharmaceuticalStockDB {
 		try (Session session = HibernateUtil.getSessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
-			pharmaceuticalStock = session.createQuery("from PharmaceuticalStock AS P WHERE P.pharmacyID = :ID", PharmaceuticalStock.class).list(); //This is a hibernate query (Get all pharmacies from the pharmacies database)
+			pharmaceuticalStock = session.createQuery("from PharmaceuticalStock AS P WHERE P.pharmacyID = :pharmacyid", PharmaceuticalStock.class).setParameter("pharmacyid", pharmacyid).list(); //This is a hibernate query (Get all pharmacies from the pharmacies database)
 																		 //Each returned row is a pharmaceuticalStock object inserted into the list of pharmacies --> pharmacies
 			transaction.commit();
 		}
@@ -115,7 +115,7 @@ public class PharmaceuticalStockDB {
 			transaction = session.beginTransaction();
 			
 			// get one object
-			String hql = " FROM PharmaceuticalStock P WHERE P.id = :pharmaceuticalstockid AND P.pharmacyID = :pharmacyid"; //From the pharmaceuticalStock table
+			String hql = " FROM PharmaceuticalStock AS P WHERE P.id = :pharmaceuticalstockid AND P.pharmacyID = :pharmacyid"; //From the pharmaceuticalStock table
 			Query query = session.createQuery(hql);
 			query.setParameter("pharmaceuticalstockid", pharmaceuticalstockid); //The parameter ":id" is set to the id we passed.
 			query.setParameter("pharmacyid", pharmacyid); //The parameter ":id" is set to the id we passed.

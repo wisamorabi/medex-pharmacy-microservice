@@ -12,7 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
+import com.medex.communicationmodules.Status;
 import com.medex.model.Pharmaceutical;
 import com.medex.services.PharmaceuticalService;
 
@@ -57,8 +57,8 @@ public class PharmaceuticalResources {
 
 	@DELETE
 	@Path("{Pharmaceuticalid}")
-	public void removePharmaceutical(@PathParam("Pharmaceuticalid") int id, Pharmaceutical Pharmaceutical) {
-		pharmaceuticalService.removePharmaceutical(id);
+	public Status removePharmaceutical(@PathParam("Pharmaceuticalid") int id) {
+		return pharmaceuticalService.removePharmaceutical(id);
 	}
 	
 

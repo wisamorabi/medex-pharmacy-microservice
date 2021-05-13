@@ -54,11 +54,11 @@ public class PharmaceuticalStockService {
 	 //pharmacys/{id}/pharmaceuticalStocks web service requirement #3: Allocate a create PharmaceuticalStock pharmaceuticalStock to a pharmacy if the capabilities required by the PharmaceuticalStock is available at the pharmacy. Once it is allocated, remove the PharmaceuticalStock from the pharmaceuticalStock list by calling the correct service function.
 ////////////////////////////////////////////////////////////////////////////////////////
 
-	public Status addPharmaceuticalStock(int pharmacyid, PharmaceuticalStock pharmaceuticalStock) {
-		if (pharmacyDB.getPharmacy(pharmacyid) == null) return new Status(false);
-		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return new Status(false);
+	public PharmaceuticalStock addPharmaceuticalStock(int pharmacyid, PharmaceuticalStock pharmaceuticalStock) {
+		if (pharmacyDB.getPharmacy(pharmacyid) == null) return null;
+		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return null;
 		pharmaceuticalStockDB.insertPharmaceuticalStock(pharmaceuticalStock);
-		return new Status(true);
+		return pharmaceuticalStock;
 	}
 ////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -67,12 +67,20 @@ public class PharmaceuticalStockService {
 	// pharmacys/{id}/pharmaceuticalStocks web service requirement #5: Update a PharmaceuticalStock allocated in the pharmacy
 ////////////////////////////////////////////////////////////////////////////////////////
 
-	public Status updatePharmaceuticalStock(int pharmacyid, int pharmaceuticalStockid, PharmaceuticalStock pharmaceuticalStock)
+	public PharmaceuticalStock updatePharmaceuticalStock(int pharmacyid, int pharmaceuticalStockid, PharmaceuticalStock pharmaceuticalStock)
 	{
-		if (pharmacyDB.getPharmacy(pharmacyid) == null) return new Status(false);
-		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return new Status(false);
-		if (pharmaceuticalStockDB.getPharmaceuticalStock(pharmacyid, pharmaceuticalStock.getId()) == null) return new Status(false);
+		if (pharmacyDB.getPharmacy(pharmacyid) == null) return null;
+		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return null;
+		if (pharmaceuticalStockDB.getPharmaceuticalStock(pharmacyid, pharmaceuticalStock.getId()) == null) return null;
 		pharmaceuticalStockDB.updatePharmaceuticalStock(pharmaceuticalStock);
+		return pharmaceuticalStock;
+	}
+	
+	
+	public Status removePharmaceuticalStock(int pharmacyid, int pharmaceuticalStockid)
+	{
+		if (pharmaceuticalStockDB.getPharmaceuticalStock(pharmacyid, pharmaceuticalStockid) == null) return new Status(false);
+		pharmaceuticalStockDB.deletePharmaceuticalStock(pharmaceuticalStockid);
 		return new Status(true);
 	}
 ////////////////////////////////////////////////////////////////////////////////////////

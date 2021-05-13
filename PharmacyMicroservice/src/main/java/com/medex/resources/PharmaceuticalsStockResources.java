@@ -23,7 +23,7 @@ public class PharmaceuticalsStockResources
 {
 	PharmaceuticalStockService pharmaceuticalsStockService = new PharmaceuticalStockService();
 	
-	public void pharmaceuticalsStockresources(int id) {}
+	public void pharmaceuticalsStockresources() {}
 
 
 	// hosts/{id}/pharmaceuticalStocks web service Requirement #1: Retrive the PharmaceuticalStocks allocated in a host.
@@ -62,7 +62,7 @@ public class PharmaceuticalsStockResources
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Status allocateHostPharmaceuticalStock(@PathParam("pharmacyid")int pharmacyid, PharmaceuticalStock pharmaceuticalstock)
+	public PharmaceuticalStock allocateHostPharmaceuticalStock(@PathParam("pharmacyid")int pharmacyid, PharmaceuticalStock pharmaceuticalstock)
 	{
 		return pharmaceuticalsStockService.addPharmaceuticalStock(pharmacyid, pharmaceuticalstock);
 	}
@@ -86,7 +86,7 @@ public class PharmaceuticalsStockResources
 	@Path("{pharmaceuticalStockid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Status updateHostPharmaceuticalStock(@PathParam("pharmacyid")int pharmacyid, @PathParam("pharmaceuticalStockid") int pharmaceuticalStockid, PharmaceuticalStock pharmaceuticalStock)
+	public PharmaceuticalStock updateHostPharmaceuticalStock(@PathParam("pharmacyid")int pharmacyid, @PathParam("pharmaceuticalStockid") int pharmaceuticalStockid, PharmaceuticalStock pharmaceuticalStock)
 	{
 		return pharmaceuticalsStockService.updatePharmaceuticalStock(pharmacyid, pharmaceuticalStockid, pharmaceuticalStock);
 	}

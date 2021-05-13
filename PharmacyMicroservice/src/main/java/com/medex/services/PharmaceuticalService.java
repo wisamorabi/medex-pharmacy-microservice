@@ -2,6 +2,7 @@ package com.medex.services;
 
 import java.util.List;
 
+import com.medex.communicationmodules.Status;
 import com.medex.database.PharmaceuticalDB;
 import com.medex.model.Pharmaceutical;
 
@@ -32,9 +33,11 @@ public class PharmaceuticalService {
 		pharmaceuticaldb.updatePharmaceutical(aPharmaceutical); return aPharmaceutical;
 	}
 	
-	public void removePharmaceutical(int id)
+	public Status removePharmaceutical(int id)
 	{
+		if (pharmaceuticaldb.getPharmaceutical(id) == null) return new Status(false);
 		pharmaceuticaldb.deletePharmaceutical(id);
+		return new Status(true);
 	}
 }
 

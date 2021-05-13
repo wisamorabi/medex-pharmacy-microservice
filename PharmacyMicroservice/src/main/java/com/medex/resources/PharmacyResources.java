@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.medex.communicationmodules.PharmacyInfo;
+import com.medex.communicationmodules.Status;
 import com.medex.model.Pharmacy;
 import com.medex.services.PharmacyService;
 
@@ -28,7 +29,7 @@ public class PharmacyResources {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<PharmacyInfo> getPharmacys() {
+	public List<PharmacyInfo> getPharmacies() {
 		return pharmacyService.getAllPharmacies();
 	}
 
@@ -42,7 +43,7 @@ public class PharmacyResources {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Pharmacy addPharmacy(Pharmacy aPharmacy) {
+	public PharmacyInfo addPharmacy(Pharmacy aPharmacy) {
 		return pharmacyService.addPharmacy(aPharmacy);
 	}
 
@@ -50,19 +51,19 @@ public class PharmacyResources {
 	@Path("{Pharmacyid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Pharmacy updatePharmacy(@PathParam("Pharmacyid") int id, Pharmacy Pharmacy) {
+	public PharmacyInfo updatePharmacy(@PathParam("Pharmacyid") int id, Pharmacy Pharmacy) {
 		Pharmacy.setId(id);
 		return pharmacyService.updatePharmacy(Pharmacy);
 	}
 
 	@DELETE
 	@Path("{Pharmacyid}")
-	public void removePharmacy(@PathParam("Pharmacyid") int id, Pharmacy Pharmacy) {
-		pharmacyService.removePharmacy(id);
+	public Status removePharmacy(@PathParam("Pharmacyid") int id) {
+		return pharmacyService.removePharmacy(id);
 	}
 	
 	@Path("{Pharmacyid}/PharmaceuticalsStock")
-	public PharmaceuticalsStockResources getPharmaceuticalsStock(@PathParam("Pharmacyid")int id)
+	public PharmaceuticalsStockResources getPharmaceuticalsStock()
 	{
 		return new PharmaceuticalsStockResources();
 	}
