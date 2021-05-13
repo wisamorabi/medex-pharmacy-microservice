@@ -13,7 +13,7 @@ public class PharmaceuticalService {
 	
 	//All what is below is just calling the functions belonging to the pharmacies' database/table.
 	
-	public List<Pharmaceutical>getAllPharmacies()
+	public List<Pharmaceutical>getAllPharmaceuticals()
 	{
 		return pharmaceuticaldb.getPharmacies();
 	}

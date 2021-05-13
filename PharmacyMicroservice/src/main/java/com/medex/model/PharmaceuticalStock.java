@@ -13,10 +13,13 @@ public class PharmaceuticalStock {
 	int id;
 	@Column(name="medicineID")
 	int medicineID;
-	@Column(name="medicineStock")
+	@Column(name="pharmacyID")
 	int pharmacyID;
 	@Column(name="medicineStock")
 	int medicineStock;
+	@Column(name="medicinePrice")
+	int medicinePrice;
+	
 
 	
 	public PharmaceuticalStock() {}
@@ -27,10 +30,7 @@ public class PharmaceuticalStock {
 		this.medicineID = amedicineID;
 		this.pharmacyID = apharmacyID;
 		this.medicineStock = amedicineStock;
-
-
-
-	
+		this.medicinePrice = amedicinePrice;
 }
 
 	public int getId() {
@@ -64,4 +64,13 @@ public class PharmaceuticalStock {
 	public void setMedicineStock(int medicineStock) {
 		this.medicineStock = medicineStock;
 	}
+
+	public int getMedicinePrice() {
+		return medicinePrice;
+	}
+
+	public void setMedicinePrice(int medicinePrice) {
+		this.medicinePrice = medicinePrice;
+	}
+	
 }

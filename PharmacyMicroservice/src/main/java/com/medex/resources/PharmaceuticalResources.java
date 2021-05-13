@@ -29,7 +29,7 @@ public class PharmaceuticalResources {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pharmaceutical> getPharmaceuticals() {
-		return pharmaceuticalService.getAllPharmacies();
+		return pharmaceuticalService.getAllPharmaceuticals();
 	}
 
 	@GET
