@@ -19,7 +19,7 @@ import com.medex.services.PharmacyService;
 
 
 //Request resources which acts as a layer before our Pharmacy services
-@Path("/Pharmacies")
+@Path("/pharmacies")
 public class PharmacyResources {
 	PharmacyService pharmacyService = new PharmacyService();
 
@@ -62,7 +62,7 @@ public class PharmacyResources {
 		return pharmacyService.removePharmacy(id);
 	}
 	
-	@Path("{Pharmacyid}/PharmaceuticalsStock")
+	@Path("{Pharmacyid}/pharmaceuticalsStock")
 	public PharmaceuticalsStockResources getPharmaceuticalsStock()
 	{
 		return new PharmaceuticalsStockResources();

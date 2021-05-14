@@ -14,7 +14,7 @@ public class PharmaceuticalStockDB {
 	public void insertPharmaceuticalStock(PharmaceuticalStock pharmaceuticalStock)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -39,7 +39,7 @@ public class PharmaceuticalStockDB {
 	public void updatePharmaceuticalStock(PharmaceuticalStock pharmaceuticalStock)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -67,7 +67,7 @@ public class PharmaceuticalStockDB {
 	{
 		Transaction transaction = null; //You have to make a transaction object
 		PharmaceuticalStock pharmaceuticalStock = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -95,7 +95,7 @@ public class PharmaceuticalStockDB {
 		Transaction transaction = null;
 		List<PharmaceuticalStock> pharmaceuticalStock = null;
 		
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
 			pharmaceuticalStock = session.createQuery("from PharmaceuticalStock AS P WHERE P.pharmacyID = :pharmacyid", PharmaceuticalStock.class).setParameter("pharmacyid", pharmacyid).list(); //This is a hibernate query (Get all pharmacies from the pharmacies database)
@@ -109,13 +109,13 @@ public class PharmaceuticalStockDB {
 	{
 		Transaction transaction = null;
 		PharmaceuticalStock pharmaceuticalStock = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession())
 		{
 			//start a transaction
 			transaction = session.beginTransaction();
 			
 			// get one object
-			String hql = " FROM PharmaceuticalStock AS P WHERE P.id = :pharmaceuticalstockid AND P.pharmacyID = :pharmacyid"; //From the pharmaceuticalStock table
+			String hql = "FROM PharmaceuticalStock P WHERE P.id = :pharmaceuticalstockid AND P.pharmacyID = :pharmacyid"; //From the pharmaceuticalStock table
 			Query query = session.createQuery(hql);
 			query.setParameter("pharmaceuticalstockid", pharmaceuticalstockid); //The parameter ":id" is set to the id we passed.
 			query.setParameter("pharmacyid", pharmacyid); //The parameter ":id" is set to the id we passed.

@@ -22,7 +22,7 @@ public class PharmacyService {
 	{
 		List<Pharmacy> pharmacyList = pharmacydb.getPharmacies(); //Get all hosts.
 		List<PharmacyInfo> pharmacyinfoList = new ArrayList<PharmacyInfo>(); //Make a list that contains HostInfo instances
-		if (pharmacyList.isEmpty() == false) return null;	
+		if (pharmacyList.isEmpty() == true) return null;	
 		//If the list of hosts is not empty, "cast" every host instance into a HostInfo instance
 		for (Pharmacy p : pharmacyList) {
 			pharmacyinfoList.add(PharmacyToPharmacyInfo(p));
@@ -44,7 +44,9 @@ public class PharmacyService {
 	
 	public PharmacyInfo updatePharmacy(Pharmacy aPharmacy)
 	{
-		pharmacydb.updatePharmacy(aPharmacy); return PharmacyToPharmacyInfo(aPharmacy);
+		if (pharmacydb.getPharmacy(aPharmacy.getId()) == null) return null; 
+		pharmacydb.updatePharmacy(aPharmacy); 
+		return PharmacyToPharmacyInfo(aPharmacy);
 	}
 	
 	public Status removePharmacy(int id)

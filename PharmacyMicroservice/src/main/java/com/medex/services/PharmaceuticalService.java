@@ -30,7 +30,9 @@ public class PharmaceuticalService {
 	
 	public Pharmaceutical updatePharmaceutical(Pharmaceutical aPharmaceutical)
 	{
-		pharmaceuticaldb.updatePharmaceutical(aPharmaceutical); return aPharmaceutical;
+		if (pharmaceuticaldb.getPharmaceutical(aPharmaceutical.getId()) == null) return null;
+		pharmaceuticaldb.updatePharmaceutical(aPharmaceutical);
+		return aPharmaceutical;
 	}
 	
 	public Status removePharmaceutical(int id)

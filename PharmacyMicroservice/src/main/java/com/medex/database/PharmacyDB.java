@@ -14,7 +14,7 @@ public class PharmacyDB {
 	public void insertPharmacy(Pharmacy pharmacy)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -39,7 +39,7 @@ public class PharmacyDB {
 	public void updatePharmacy(Pharmacy pharmacy)
 	{
 		Transaction transaction = null; //You have to make a transaction object
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -67,7 +67,7 @@ public class PharmacyDB {
 	{
 		Transaction transaction = null; //You have to make a transaction object
 		Pharmacy pharmacy = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) //And now we make a session using the HibernateUtil object
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession()) //And now we make a session using the HibernateUtil object
 		{
 			// start a transaction using the session
 			transaction = session.beginTransaction();
@@ -95,7 +95,7 @@ public class PharmacyDB {
 		Transaction transaction = null;
 		List<Pharmacy> pharmacies = null;
 		
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
 			pharmacies = session.createQuery("from Pharmacy", Pharmacy.class).list(); //This is a hibernate query (Get all pharmacies from the pharmacies database)
@@ -109,7 +109,7 @@ public class PharmacyDB {
 	{
 		Transaction transaction = null;
 		Pharmacy pharmacy = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession())
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession())
 		{
 			//start a transaction
 			transaction = session.beginTransaction();

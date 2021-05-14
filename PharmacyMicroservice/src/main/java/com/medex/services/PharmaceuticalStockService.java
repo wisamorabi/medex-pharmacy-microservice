@@ -55,6 +55,7 @@ public class PharmaceuticalStockService {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 	public PharmaceuticalStock addPharmaceuticalStock(int pharmacyid, PharmaceuticalStock pharmaceuticalStock) {
+		pharmaceuticalStock.setPharmacyID(pharmacyid);
 		if (pharmacyDB.getPharmacy(pharmacyid) == null) return null;
 		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return null;
 		pharmaceuticalStockDB.insertPharmaceuticalStock(pharmaceuticalStock);
@@ -69,8 +70,12 @@ public class PharmaceuticalStockService {
 
 	public PharmaceuticalStock updatePharmaceuticalStock(int pharmacyid, int pharmaceuticalStockid, PharmaceuticalStock pharmaceuticalStock)
 	{
+
+		pharmaceuticalStock.setId(pharmaceuticalStockid);
 		if (pharmacyDB.getPharmacy(pharmacyid) == null) return null;
+
 		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return null;
+
 		if (pharmaceuticalStockDB.getPharmaceuticalStock(pharmacyid, pharmaceuticalStock.getId()) == null) return null;
 		pharmaceuticalStockDB.updatePharmaceuticalStock(pharmaceuticalStock);
 		return pharmaceuticalStock;
