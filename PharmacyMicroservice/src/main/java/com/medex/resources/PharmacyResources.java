@@ -67,4 +67,10 @@ public class PharmacyResources {
 	{
 		return new PharmaceuticalsStockResources();
 	}
+	
+	@Path("{Pharmacyid}/orders")
+	public OrderResources getOrders()
+	{
+		return new OrderResources();
+	}
 }
