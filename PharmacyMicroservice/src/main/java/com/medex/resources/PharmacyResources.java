@@ -73,4 +73,12 @@ public class PharmacyResources {
 	{
 		return new OrderResources();
 	}
+	
+	
+	@Path("/login/{username}/{password}")
+	public Pharmacy getPatientLogin(@PathParam("username") String username, @PathParam("password") String password)
+	{
+		return pharmacyService.getPharmacyLogin(username, password);
+	}
+	
 }

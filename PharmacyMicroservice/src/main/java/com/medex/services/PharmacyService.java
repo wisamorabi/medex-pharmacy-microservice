@@ -65,6 +65,14 @@ public class PharmacyService {
 		
 		return pharmacyInfo;
 	}
+	
+	
+	
+	public Pharmacy getPharmacyLogin(String username, String password)
+	{
+		return pharmacydb.getPharmacyLogin(username, password); //Get all hosts.
+
+	}
 }
 
 

@@ -140,4 +140,43 @@ public class PharmacyDB {
 		return pharmacy; //Return the pharmacy object retrieved
 	}
 	
+	
+	
+	
+	public Pharmacy getPharmacyLogin(String username, String password)
+	{
+		Transaction transaction = null;
+		Pharmacy pharmacy = null;
+		try (Session session = HibernateUtil.getPharmacySessionFactory().openSession())
+		{
+			//start a transaction
+			transaction = session.beginTransaction();
+			
+			// get one object
+			String hql = "FROM Pharmacy H WHERE H.username = :username and H.password = :password"; //From the patient table
+			Query query = session.createQuery(hql);
+			query.setParameter("username", username); //The parameter ":id" is set to the id we passed.
+			query.setParameter("password", password); //The parameter ":id" is set to the id we passed.
+			List results = query.getResultList(); //The results are given to us in a list.
+												  //Since the id is unique, we will get a list of one item
+			
+			//If the result is not null, we get a single patient object
+			if (results != null && !results.isEmpty())
+			{
+				pharmacy = (Pharmacy) results.get(0); //So, we retrieve said patient from the first index in the list
+			}
+			//commit transaction
+			transaction.commit();
+		}
+		catch (Exception e)
+		{
+			if (transaction != null)
+			{
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return pharmacy; //Return the patient object retrieved
+	}
+	
 }
