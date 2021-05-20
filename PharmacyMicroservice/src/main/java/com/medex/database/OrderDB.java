@@ -24,7 +24,8 @@ public class OrderDB {
 		try (Session session = HibernateUtil.getShoppingSessionFactory().openSession())
 		{
 			transaction = session.beginTransaction();
-			orders = session.createQuery("FROM Ordr H WHERE H.pharmacyid = :pharmacyid", Ordr.class).setParameter("pharmacyid", pharmacyid).list(); //This is a hibernate query (Get all orders from the orders database)
+			orders = session.createQuery("FROM Ordr", Ordr.class).list(); //This is a hibernate query (Get all orders from the orders database)
+			//orders = session.createQuery("FROM Ordr H WHERE H.pharmacyid = :pharmacyid", Ordr.class).setParameter("pharmacyid", pharmacyid).list(); //This is a hibernate query (Get all orders from the orders database)
 																		 //Each returned row is a order object inserted into the list of orders --> orders
 			transaction.commit();
 		}

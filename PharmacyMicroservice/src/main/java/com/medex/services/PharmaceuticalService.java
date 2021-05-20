@@ -15,7 +15,7 @@ public class PharmaceuticalService {
 	
 	public List<Pharmaceutical>getAllPharmaceuticals()
 	{
-		return pharmaceuticaldb.getPharmacies();
+		return pharmaceuticaldb.getPharmaceuticals();
 	}
 	
 	public Pharmaceutical getPharmaceutical(int id)
