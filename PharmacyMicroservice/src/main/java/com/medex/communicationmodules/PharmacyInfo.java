@@ -62,7 +62,7 @@ public class PharmacyInfo {
 			pharmacyStock.put(i.getId(),i);
 		}
 	}
-	public Map<Integer, PharmaceuticalStock> getHostVMs()
+	public Map<Integer, PharmaceuticalStock> getPharmaceuticalStock()
 	{
 		return pharmacyStock;
 	}

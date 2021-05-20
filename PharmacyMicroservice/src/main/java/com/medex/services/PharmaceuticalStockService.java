@@ -58,6 +58,14 @@ public class PharmaceuticalStockService {
 		pharmaceuticalStock.setPharmacyID(pharmacyid);
 		if (pharmacyDB.getPharmacy(pharmacyid) == null) return null;
 		if (pharmaceuticalDB.getPharmaceutical(pharmaceuticalStock.getMedicineID()) == null) return null;
+		List<PharmaceuticalStock> lst = getPharmaceuticalStocks(pharmacyid);
+		for (PharmaceuticalStock ps : lst)
+		{
+			if (ps.getMedicineID() == pharmaceuticalStock.getMedicineID())
+			{
+				return null;
+			}
+		}
 		pharmaceuticalStockDB.insertPharmaceuticalStock(pharmaceuticalStock);
 		return pharmaceuticalStock;
 	}
