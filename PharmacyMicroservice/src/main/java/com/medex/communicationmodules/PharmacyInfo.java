@@ -10,7 +10,7 @@ import javax.persistence.*;
 import com.medex.model.PharmaceuticalStock;
 import com.medex.model.Pharmacy;
 
-//The pharmacy class
+//The pharmacy class.
 @Entity //A 'serializable' entity
 //Now, the fields that we will annotate will be stored in the hosts table.
 public class PharmacyInfo {
